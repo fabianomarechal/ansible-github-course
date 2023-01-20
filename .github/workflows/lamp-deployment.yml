@@ -14,6 +14,4 @@ jobs:
       - name: linting
         uses: ansible/ansible-lint-action@00bab8f19cddd45b04ba28dc38e5d9a2a1b1366c
         with:
-          targets: |
-            ansible/playbook.yml
-            ansible/inventory.yml
+          path: ansible
