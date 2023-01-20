@@ -18,14 +18,14 @@
         dest: ~/.ssh/known_hosts
         mode: 0600
     - name: Check if known_hosts contains server's fingerprint
-      ansible.builtin.command: 
+      ansible.builtin.command:
         cmd: ssh-keygen -F {{ inventory_hostname }}
       register: keygen
       failed_when: keygen.stderr != ''
       changed_when: false
 
     - name: Fetch remote ssh key
-      ansible.builtin.command: 
+      ansible.builtin.command:
         cmd: ssh-keyscan -T5 {{ inventory_hostname }}
       register: keyscan
       failed_when: keyscan.rc != 0 or keyscan.stdout == ''
@@ -45,26 +45,26 @@
   hosts: web-servers
   tasks:
     - name: Ensure Apt is up to date
-      ansible.builtin.apt: 
-       update_cache: yes
+      ansible.builtin.apt:
+        update_cache: true
       become: true
     - name: Ensure Apache is installed
-      ansible.builtin.apt: 
+      ansible.builtin.apt:
         name: apache2=2.4.29*
         state: present
       become: true
     - name: Ensure PHP is installed
-      ansible.builtin.apt: 
+      ansible.builtin.apt:
         name: php7.2=7.2.24*
         state: present
       become: true
     - name: Ensure PHP Module for Apache is installed
-      ansible.builtin.apt: 
+      ansible.builtin.apt:
         name: libapache2-mod-php7.2=7.2.24*
         state: present
       become: true
     - name: Ensure Mysql Module for Apache is installed
-      ansible.builtin.apt: 
+      ansible.builtin.apt:
         name: php7.2-mysql=latest
         state: present
       become: true
